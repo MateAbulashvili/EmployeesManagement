@@ -1,4 +1,7 @@
 using EmployeesManagement.Areas.Identity.Data;
+using EmployeesManagement.DAL.INTERFACES;
+using EmployeesManagement.DAL.REPOSITORY;
+using EmployeesManagement.Mapper;
 using EmployeesManagement.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -27,10 +30,14 @@ namespace EmployeesManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<EmployeeRepository>();
             services.AddDbContext<EmployeeDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                    .AddEntityFrameworkStores<EmployeeDbContext>();
+            services.AddAutoMapper(typeof(MyMappingProfile));
             services.AddRazorPages();
+
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

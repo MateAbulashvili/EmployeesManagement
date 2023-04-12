@@ -14,6 +14,7 @@ namespace EmployeesManagement.Models
         }
         public DbSet<EmployeeModel> Employees { get; set;}
         public DbSet<ApplicationUser> ApplicationUsers { get; set;}
+        public DbSet<IdentityUserClaim<string>> identityUsers { get; set;}
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

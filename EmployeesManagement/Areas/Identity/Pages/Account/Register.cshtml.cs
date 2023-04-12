@@ -49,6 +49,8 @@ namespace EmployeesManagement.Areas.Identity.Pages.Account
             
             [DataType(DataType.Text)]
             [Display(Name = "Personal Number")]
+            [MaxLength(11)]
+            [MinLength(11, ErrorMessage = "Number must be 11 digits")]
             public string PersonalNumber { get; set; }
 
             [Required]
@@ -64,6 +66,7 @@ namespace EmployeesManagement.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
+
             public string Email { get; set; }
 
             [Required]

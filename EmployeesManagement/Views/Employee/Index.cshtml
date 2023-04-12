@@ -1,8 +1,14 @@
-﻿@model IEnumerable<EmployeesManagement.Models.EmployeeModel>
+﻿@model IEnumerable<EmployeesManagement.DAL.DTO.EmployeeDTO>
 
 @{
     ViewData["Title"] = "Index";
 }
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <input type="text" class="form-control" name="searchString" placeholder="Search...">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <h1>List of employee</h1>
@@ -24,9 +30,6 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Email)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Password)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Gender)
@@ -56,10 +59,7 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Password)
-                        </td>
+                        </td>          
                         <td>
                             @Html.DisplayFor(modelItem => item.Gender)
                         </td>
