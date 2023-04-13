@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using EmployeesManagement.DAL.DTO;
+using EmployeesManagement.DAL.INTERFACES;
 using EmployeesManagement.DAL.REPOSITORY;
 using EmployeesManagement.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -27,29 +28,22 @@ namespace EmployeesManagement.Controllers
         }
 
         // GET: EmployeeController
+        [HttpGet]
         [Authorize]
-        public IActionResult Index(string searchString)
+        public IActionResult Index(string? searchString)
         {
-            var Dbresult = _context.Employees.ToList();
-            var mapper = _mapper.Map<List<EmployeeDTO>>(Dbresult);
-
-            return View(mapper);
-
-            //var employees = _context.Employees.AsEnumerable();
-
-            //if (!string.IsNullOrEmpty(searchString))
-            //{
-            //    employees = employees.Where(e => e.FirstName.Contains(searchString) ||
-            //                                     e.LastName.Contains(searchString) ||
-            //                                     e.PersonalNumber.Contains(searchString) ||
-            //                                     e.Email.Contains(searchString));
-            //}
-
-            //return View(employees);
+            try
+            {
+                return View(_employeeRepository.EmployeeList(searchString));
+            }
+            catch (Exception ex )
+            {
+                return BadRequest(new { ErrorMsg = ex.Message });
+            }
         }
 
         // GET: EmployeeController/Details/5
-        public IActionResult Details(int id)
+        public IActionResult Details(int id) 
         {
             return View();
         }
@@ -59,12 +53,21 @@ namespace EmployeesManagement.Controllers
 
         public IActionResult AddOrEdit(int id = 0)
         {
-            if (id == 0)
+
+            try
             {
-                return View(new EmployeeModel());
+                if (id == 0)
+                {
+                    return View(new EmployeeModel());
+                }
+                else
+                    return View(_context.Employees.Find(id));
             }
-            else
-                return View(_context.Employees.Find(id));
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { ErrorMsg = ex.Message });
+            }
         }
 
 
@@ -72,48 +75,45 @@ namespace EmployeesManagement.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEdit([Bind("Id,FirstName,LastName,PersonalNumber,Email,Password,Gender,DOB,Position,Status,FiredDate,Phone")] EmployeeDTO model)
+        public IActionResult AddOrEdit([Bind("Id,FirstName,LastName,PersonalNumber,Email,Password,Gender,DOB,Position,Status,FiredDate,Phone")] EmployeeDTO model)
         {
             try
             {
-
                 if (ModelState.IsValid)
                 {
-
                     var result = _employeeRepository.AddOrEdit(model);
                     if (result)
                     {
                         return RedirectToAction(nameof(Index));
                     }
 
-                    
                 }
-                return View("Model State not valid");
+                return View("");
 
             }
-            catch(Exception ex )
+            catch (Exception ex)
             {
                 return BadRequest(new { ErrorMsg = ex.Message });
             }
         }
-        
+
         // POST: EmployeeController/Delete/5
-        [HttpPost,ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
+        public IActionResult Delete(int id)
         {
             try
-            {                
+            {
                 var userToDelete = _employeeRepository.Delete(id);
                 if (userToDelete)
                 {
                     return RedirectToAction(nameof(Index));
                 }
-                else 
+                else
                     return View();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(new { ErrorMsg = ex.Message });
             }

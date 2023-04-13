@@ -22,6 +22,7 @@ namespace EmployeesManagement.DAL.DTO
         public string PersonalNumber { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
+        [EmailAddress]
         public string Email { get; set; }
 
         public bool Gender { get; set; }

@@ -56,21 +56,35 @@
                         <input asp-for="DOB" class="form-control" />
                         <span asp-validation-for="DOB" class="text-danger"></span>
                     </div>
-                </div>
-                 <div class="col-md-6">
+                </div>                
+                <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Position" class="control-label"></label>
-                        <input asp-for="Position" class="form-control" />
-                        <span asp-validation-for="Position" class="text-danger"></span>
+                        <select asp-for="Position" class="form-control">
+                            <option value="">-- Select Position --</option>
+                            <option value="CEO">CEO</option>
+                            <option value="GeneralManager">General Manager</option>
+                            <option value="Designer">Designer</option>
+                            <option value="BackendDeveloper">Backend Developer</option>
+                            <option value="FrontendDeveloper">Frontend Developer</option>
+                            <option value="Visualartist">Visual Artist</option>
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Status" class="control-label"></label>
-                        <input asp-for="Status" class="form-control" />
+                        <select asp-for="Status" class="form-control">
+                            <option value="">-- Select Status --</option>
+                            <option value="Active">Active</option>
+                            <option value="Inactive">Inactive</option>
+                            <option value="Pending">Pending</option>
+                        </select>
                         <span asp-validation-for="Status" class="text-danger"></span>
                     </div>
                 </div>
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="FiredDate" class="control-label"></label>
@@ -95,8 +109,10 @@
 </div>
 
 
+
 @section Scripts {
     @{
+
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }

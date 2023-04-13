@@ -9,6 +9,8 @@ namespace EmployeesManagement.DAL.INTERFACES
     {
         public bool AddOrEdit(EmployeeDTO model);
         public bool Delete(int id);
+        public bool EmailExists(string email,int userId);
+        public bool PNumberExists(string Pnumber, int userId);
 
     }
 }

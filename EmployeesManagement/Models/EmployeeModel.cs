@@ -6,7 +6,7 @@ namespace EmployeesManagement.Models
 {
     public class EmployeeModel
     {
-        [Key]
+        [Key] 
         public int Id { get; set; }
         [Required(ErrorMessage ="{0} is required")]
         [DisplayName("First Name")]
@@ -23,6 +23,7 @@ namespace EmployeesManagement.Models
         public string PersonalNumber { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
+        [EmailAddress]
         public string Email { get; set; }
 
         public bool Gender { get; set; }
