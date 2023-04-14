@@ -42,15 +42,8 @@ namespace EmployeesManagement.Controllers
             }
         }
 
-        // GET: EmployeeController/Details/5
-        public IActionResult Details(int id) 
-        {
-            return View();
-        }
-
         // GET: EmployeeController/AddOrEdit
         [Authorize]
-
         public IActionResult AddOrEdit(int id = 0)
         {
 
@@ -75,7 +68,7 @@ namespace EmployeesManagement.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddOrEdit([Bind("Id,FirstName,LastName,PersonalNumber,Email,Password,Gender,DOB,Position,Status,FiredDate,Phone")] EmployeeDTO model)
+        public IActionResult AddOrEdit([Bind("Id,FirstName,LastName,PersonalNumber,Email,Gender,DOB,Position,Status,FiredDate,Phone")] EmployeeDTO model)
         {
             try
             {

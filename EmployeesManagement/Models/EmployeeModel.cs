@@ -6,9 +6,9 @@ namespace EmployeesManagement.Models
 {
     public class EmployeeModel
     {
-        [Key] 
+        [Key]
         public int Id { get; set; }
-        [Required(ErrorMessage ="{0} is required")]
+        [Required(ErrorMessage = "{0} is required")]
         [DisplayName("First Name")]
         public string FirstName { get; set; }
 
@@ -28,8 +28,9 @@ namespace EmployeesManagement.Models
 
         public bool Gender { get; set; }
 
-        [DisplayFormat(DataFormatString ="{0:MMM-dd-yy}")]
+        [DisplayFormat(DataFormatString = "{0:MMM-dd-yy}")]
         public DateTime DOB { get; set; }
+
         public string Position { get; set; }
         public string Status { get; set; }
         public DateTime? FiredDate { get; set; }

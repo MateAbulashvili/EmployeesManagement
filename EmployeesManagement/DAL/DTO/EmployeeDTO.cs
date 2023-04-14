@@ -29,7 +29,9 @@ namespace EmployeesManagement.DAL.DTO
 
         [DisplayFormat(DataFormatString = "{0:MMM-dd-yy}")]
         public DateTime DOB { get; set; }
+        [Required]
         public string Position { get; set; }
+        [Required]
         public string Status { get; set; }
         public DateTime? FiredDate { get; set; }
         public string Phone { get; set; }

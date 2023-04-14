@@ -27,6 +27,7 @@
             <div class="form-floating mb-3">
                 <input asp-for="Input.PersonalNumber" class="form-control" autocomplete="PersonalNumber" aria-required="true" placeholder="Personal Number" />
                 <label asp-for="Input.PersonalNumber">Personal Number</label>
+                <span asp-validation-for="Input.PersonalNumber" class="text-danger"></span>
             </div>
         </div>
         <div class="col-6">
