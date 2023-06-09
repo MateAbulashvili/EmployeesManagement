@@ -68,19 +68,21 @@ namespace EmployeesManagement.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddOrEdit([Bind("Id,FirstName,LastName,PersonalNumber,Email,Gender,DOB,Position,Status,FiredDate,Phone")] EmployeeDTO model)
+        public IActionResult AddOrEdit([Bind("Id,FirstName,LastName,PersonalNumber,Email,Gender,DOB,Position,Status,FiredDate,Phone")] EmployeeModel model)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    var result = _employeeRepository.AddOrEdit(model);
+               // if (ModelState.IsValid)
+               // {
+                    var data = _mapper.Map<EmployeeDTO>(model);
+                    
+                    var result = _employeeRepository.AddOrEdit(data);
                     if (result)
                     {
                         return RedirectToAction(nameof(Index));
                     }
 
-                }
+               // }
                 return View("");
 
             }
