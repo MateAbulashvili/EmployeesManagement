@@ -3,7 +3,7 @@ name: continious integration and depoloyment
 on:
     push:
         branches:
-            -main 
+            - master 
 
 jobs:
     build:
